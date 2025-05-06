@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="th"><head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Intermediate ward admission system</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>body {
+    font-family: Sarabun, sans-serif;
+}
+.loader {
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgb(52, 152, 219) rgb(243, 243, 243) rgb(243, 243, 243);
+    border-image: initial;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: 1s linear 0s infinite normal none spin;
+    -webkit-animation: 1s linear 0s infinite normal none spin;
+    -moz-animation: 1s linear 0s infinite normal none spin;
+    margin: 20px auto;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+@-moz-keyframes spin {
+    0% {
+        -moz-transform: rotate(0deg);
+    }
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: rgb(241, 241, 241);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: rgb(136, 136, 136);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(85, 85, 85);
+}
+.form-radio-group label,
+.form-checkbox-group label {
+    margin-right: 1rem;
+}</style>
+    <link href="https://fonts.googleapis.com/css?family=Sarabun:wght@400;700&amp;display=swap" rel="stylesheet">
+<style>#pagedeck { overflow: hidden !important; }</style></head>
+<body class="bg-gradient-to-r from-blue-100 via-indigo-100 to-purple-100 min-h-screen flex flex-col items-center justify-center p-4 py-8">
+
+    <div class="bg-white shadow-xl rounded-lg p-6 md:p-10 w-full max-w-3xl">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Medical Intermediate ward admission system</h1>
+            <p class="text-xl text-gray-600 mt-1">Ramathibodi hospital</p>
+        </div>
+
+        <form id="dataForm" class="space-y-6">
+            <div>
+                <label for="id_number" class="block text-sm font-medium text-gray-700">ID:</label>
+                <input type="text" id="id_number" name="id_number" required="" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <div>
+                <label for="source_admission" class="block text-sm font-medium text-gray-700">Source of Admission:</label>
+                <select id="source_admission" name="source_admission" required="" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white">
+                    <option value="">Please select</option>
+                    <option value="ER">ER</option>
+                    <option value="Ward">Ward</option>
+                    <option value="ICU">ICU</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Sex:</label>
+                <div class="mt-2 space-x-4 form-radio-group flex flex-wrap">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="sex" value="Male" required="" class="form-radio h-4 w-4 text-indigo-600">
+                        <span class="ml-2 text-gray-700">Male</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="sex" value="Female" required="" class="form-radio h-4 w-4 text-indigo-600">
+                        <span class="ml-2 text-gray-700">Female</span>
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <label for="age" class="block text-sm font-medium text-gray-700">Age:</label>
+                <input type="number" id="age" name="age" min="15" max="100" required="" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Diagnosed with Pneumonia:</label>
+                <div class="mt-2 space-x-4 form-radio-group flex flex-wrap">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="diagnosed_pneumonia" value="Yes" required="" class="form-radio h-4 w-4 text-indigo-600">
+                        <span class="ml-2 text-gray-700">Yes</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="diagnosed_pneumonia" value="No" required="" class="form-radio h-4 w-4 text-indigo-600">
+                        <span class="ml-2 text-gray-700">No</span>
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <label for="body_temperature" class="block text-sm font-medium text-gray-700">Body Temperature (°C):</label>
+                <input type="number" id="body_temperature" name="body_temperature" step="0.1" min="35.0" max="43.0" required="" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <div>
+                <label for="systolic_bp" class="block text-sm font-medium text-gray-700">Systolic Blood Pressure (mmHg):</label>
+                <input type="number" id="systolic_bp" name="systolic_bp" min="50" max="260" required="" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <div>
+                <label for="diastolic_bp" class="block text-sm font-medium text-gray-700">Diastolic Blood Pressure (mmHg):</label>
+                <input type="number" id="diastolic_bp" name="diastolic_bp" min="30" max="150" required="" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <div>
+                <label for="heart_rate" class="block text-sm font-medium text-gray-700">Heart Rate (bpm):</label>
+                <input type="number" id="heart_rate" name="heart_rate" min="30" max="200" required="" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <div>
+                <label for="respiratory_rate" class="block text-sm font-medium text-gray-700">Respiratory Rate (bpm):</label>
+                <input type="number" id="respiratory_rate" name="respiratory_rate" min="8" max="40" required="" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <div>
+                <label for="na_level" class="block text-sm font-medium text-gray-700">Na (mmol/L):</label>
+                <input type="number" id="na_level" name="na_level" min="110" max="160" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <div>
+                <label for="k_level" class="block text-sm font-medium text-gray-700">K (mmol/L):</label>
+                <input type="number" id="k_level" name="k_level" step="0.01" min="1.00" max="7.00" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <div>
+                <label for="hco3_level" class="block text-sm font-medium text-gray-700">HCO3 (mmol/L):</label>
+                <input type="number" id="hco3_level" name="hco3_level" step="0.1" min="5.0" max="50.0" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <div>
+                <label for="hct_level" class="block text-sm font-medium text-gray-700">Hct (%):</label>
+                <input type="number" id="hct_level" name="hct_level" step="0.1" min="10.0" max="60.0" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <div>
+                <label for="wbc_level" class="block text-sm font-medium text-gray-700">WBC (x1000/µL):</label>
+                <input type="number" id="wbc_level" name="wbc_level" step="0.1" min="0.0" max="50.0" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <div>
+                <label for="lactate_level" class="block text-sm font-medium text-gray-700">Lactate Level (mmol/L):</label>
+                <input type="number" id="lactate_level" name="lactate_level" step="0.1" min="0.0" max="20.0" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Mechanical Ventilation:</label>
+                <div class="mt-2 space-x-4 form-radio-group flex flex-wrap">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="mechanical_ventilation" value="Yes" required="" class="form-radio h-4 w-4 text-indigo-600">
+                        <span class="ml-2 text-gray-700">Yes</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="mechanical_ventilation" value="No" required="" class="form-radio h-4 w-4 text-indigo-600">
+                        <span class="ml-2 text-gray-700">No</span>
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out">
+                    ส่งข้อมูล
+                </button>
+            </div>
+        </form>
+
+        <div id="loadingIndicator" class="hidden loader"></div>
+        <div id="statusMessage" class="mt-6 text-center text-sm"></div>
+        <div id="aiResultArea" class="mt-6 p-4 bg-gray-50 rounded-md shadow hidden">
+            <h2 class="text-xl font-semibold text-gray-700 mb-2">ผลลัพธ์จาก AI:</h2>
+            <pre id="aiResultOutput" class="whitespace-pre-wrap text-gray-600"></pre>
+        </div>
+    </div>
+
+    <footer class="text-center text-gray-600 mt-10 text-sm pb-8">
+        <p>© <span id="currentYear"></span> Critical Care Medicine Ramathibodi hospital. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        const form = document.getElementById('dataForm');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const statusMessage = document.getElementById('statusMessage');
+        const aiResultArea = document.getElementById('aiResultArea');
+        const aiResultOutput = document.getElementById('aiResultOutput');
+
+        // กรอก Module ของ Google app scrip + AI module
+        const GOOGLE_SCRIPT_URL = https://script.google.com/macros/s/AKfycbxDODCfbmFxCH9q9ccaNMNnq5txJc3Rw9SxOWVoekjmrO45LnbWf6G7UdMlyLFOdxxdig/exec;
+        const AI_MODULE_URL = 'YOUR_AI_MODULE_API_ENDPOINT_HERE';
+
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            loadingIndicator.classList.remove('hidden');
+            statusMessage.textContent = 'กำลังส่งข้อมูล...';
+            statusMessage.className = 'mt-6 text-center text-sm text-blue-600';
+            aiResultArea.classList.add('hidden');
+
+            const formData = new FormData(form);
+            const dataForSheet = {}; // ข้อมูลทั้งหมดสำหรับ Google Sheet
+            formData.forEach((value, key) => {
+                dataForSheet[key] = value;
+            });
+            dataForSheet['timestamp'] = new Date().toISOString();
+
+            // เตรียมข้อมูลสำหรับ AI Module (ไม่รวม lactate_level)
+            const dataForAI = { ...dataForSheet }; // คัดลอกข้อมูลทั้งหมดก่อน
+            if (dataForAI.hasOwnProperty('lactate_level')) {
+                delete dataForAI['lactate_level']; // ลบ lactate_level ออกจากข้อมูลที่จะส่งไป AI
+            }
+
+
+            let sheetSuccess = false;
+
+            try {
+                // Google sheete 
+                console.log('Sending data to Google Sheets:', dataForSheet);
+                statusMessage.textContent = 'กำลังบันทึกข้อมูลลงระบบ...';
+                const sheetResponse = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({action: "addData", data: dataForSheet }) // ส่ง dataForSheet
+                });
+
+                if (sheetResponse.ok) {
+                    const sheetResult = await sheetResponse.json();
+                    console.log('Google Sheets Response:', sheetResult);
+                    if (sheetResult.status === 'success') {
+                        sheetSuccess = true;
+                    } else {
+                        throw new Error(sheetResult.message || 'เกิดข้อผิดพลาดในการบันทึกข้อมูลลงระบบโปรดลองใหม่');
+                    }
+                } else if (sheetResponse.type === 'opaque') {
+                     console.warn('Sent data to Google Sheets (opaque response). Cannot verify success directly.');
+                     sheetSuccess = true; // Assume success for no-cors, or handle differently
+                } else {
+                     const errorText = await sheetResponse.text();
+                     throw new Error(`Google Sheets Error ${sheetResponse.status}: ${errorText.substring(0,200)}`);
+                }
+
+                // ส่งข้อมูลไป AI Module
+                statusMessage.textContent = 'กำลังส่งข้อมูลเพื่อประมูลผล';
+                console.log('Sending data to AI Module:', dataForAI); // ส่ง dataForAI
+
+                const aiResponse = await fetch(AI_MODULE_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(dataForAI) // ส่ง dataForAI
+                });
+
+                if (!aiResponse.ok) {
+                    const errorText = await aiResponse.text();
+                    throw new Error(`AI Module Error ${aiResponse.status}: ${errorText.substring(0,200)}`);
+                }
+
+                const aiData = await aiResponse.json();
+                console.log('AI Module Response:', aiData);
+
+                // แสดงผลลัพธ์จาก AI
+                aiResultOutput.textContent = JSON.stringify(aiData, null, 2);
+                aiResultArea.classList.remove('hidden');
+                
+                if(sheetSuccess){
+                    statusMessage.textContent = 'ข้อมูลถูกบันทึกและประมวลผลเรียบร้อยแล้ว!';
+                } else {
+                    statusMessage.textContent = 'ประมวลผล AI สำเร็จ)';
+                }
+                statusMessage.className = 'mt-6 text-center text-sm text-green-600';
+
+
+            } catch (error) {
+                console.error('Error during submission:', error);
+                statusMessage.textContent = `เกิดข้อผิดพลาด: ${error.message}`;
+                statusMessage.className = 'mt-6 text-center text-sm text-red-600';
+            } finally {
+                loadingIndicator.classList.add('hidden');
+                form.reset(); // ล้างข้อมูลในฟอร์ม
+            }
+        });
+    </script>
+
+</body></html>
